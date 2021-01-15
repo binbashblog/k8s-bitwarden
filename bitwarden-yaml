@@ -1,0 +1,319 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: bitwarden
+  name: bitwarden1
+  labels:
+    app: bitwarden1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitwarden1
+  template:
+    metadata:
+      labels:
+        app: bitwarden1
+    spec:
+      containers:
+      - name: bitwarden1-mssql
+        image: bitwarden/mssql:1.38.4
+        resources:
+          limits:
+            memory: 4Gi
+            cpu: 2
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        ports:
+        - containerPort: 1433
+        volumeMounts:
+        - name: pv-bitwarden1-mssql-data
+          mountPath: /var/opt/mssql/data
+        - name: pv-bitwarden1-mssql-log
+          mountPath: /var/opt/mssql/log
+        - name: pv-bitwarden1-mssql-backups
+          mountPath: /etc/bitwarden/mssql/backups
+      - name: bitwarden1-web
+        image: bitwarden/web:2.17.1
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: 2
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5500
+        ports:
+        - containerPort: 5500
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-web
+          mountPath: /etc/bitwarden/web
+      - name: bitwarden1-attachments
+        image: bitwarden/attachments:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5501
+        ports:
+        - containerPort: 5501
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-attachments
+          mountPath: /etc/bitwarden/core/attachments
+      - name: bitwarden1-api
+        image: bitwarden/api:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5502
+        ports:
+        - containerPort: 5502
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-core
+          mountPath: /etc/bitwarden/core
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-api-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-identity
+        image: bitwarden/identity:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5503
+        ports:
+        - containerPort: 5503
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-identity
+          mountPath: /etc/bitwarden/identity
+        - name: pv-bitwarden1-bitwarden-core
+          mountPath: /etc/bitwarden/core
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-identity-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-sso
+        image: bitwarden/sso:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5508
+        ports:
+        - containerPort: 5508
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-identity
+          mountPath: /etc/bitwarden/identity
+        - name: pv-bitwarden1-bitwarden-core
+          mountPath: /etc/bitwarden/core
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-sso-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-admin
+        image: bitwarden/admin:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5504
+        ports:
+        - containerPort: 5504
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-core
+          mountPath: /etc/bitwarden/core
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-admin-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-portal
+        image: bitwarden/portal:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5509
+        ports:
+        - containerPort: 5509
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-core
+          mountPath: /etc/bitwarden/core
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-portal-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-icons
+        image: bitwarden/icons:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5505
+        ports:
+        - containerPort: 5505
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-icons-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-notifications
+        image: bitwarden/notifications:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5506
+        ports:
+        - containerPort: 5506
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-notifications-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-events
+        image: bitwarden/events:1.38.4
+        resources:
+          limits:
+            memory: "0.5Gi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://+:5507
+        ports:
+        - containerPort: 5507
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-cacerts
+          mountPath: /etc/bitwarden/ca-certificates
+        - name: pv-bitwarden1-bitwarden-events-logs
+          mountPath: /etc/bitwarden/logs
+      - name: bitwarden1-nginx
+        image: bitwarden/nginx:1.38.4
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: 2
+        envFrom:
+        - configMapRef:
+            name: bitwarden1-config
+        ports:
+        - name: http-port
+          containerPort: 8088
+        volumeMounts:
+        - name: pv-bitwarden1-bitwarden-nginx
+          mountPath: /etc/bitwarden/nginx
+        - name: pv-bitwarden1-bitwarden-letsencrypt
+          mountPath: /etc/letsencrypt
+        - name: pv-bitwarden1-bitwarden-ssl
+          mountPath: /etc/ssl
+        - name: pv-bitwarden1-bitwarden-nginx-logs
+          mountPath: /var/log/nginx
+      volumes:
+      - name: pv-bitwarden1-mssql-data
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-mssql-data
+      - name: pv-bitwarden1-mssql-log
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-mssql-log
+      - name: pv-bitwarden1-mssql-backups
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-mssql-backups
+      - name: pv-bitwarden1-bitwarden-web
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-web
+      - name: pv-bitwarden1-bitwarden-attachments
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-attachments
+      - name: pv-bitwarden1-bitwarden-core
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-core
+      - name: pv-bitwarden1-bitwarden-cacerts
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-cacerts
+      - name: pv-bitwarden1-bitwarden-identity
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-identity
+      - name: pv-bitwarden1-bitwarden-nginx
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-nginx
+      - name: pv-bitwarden1-bitwarden-letsencrypt
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-letsencrypt
+      - name: pv-bitwarden1-bitwarden-ssl
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-ssl
+      - name: pv-bitwarden1-bitwarden-sso-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-sso-logs
+      - name: pv-bitwarden1-bitwarden-portal-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-portal-logs
+      - name: pv-bitwarden1-bitwarden-events-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-events-logs
+      - name: pv-bitwarden1-bitwarden-nginx-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-nginx-logs
+      - name: pv-bitwarden1-bitwarden-identity-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-identity-logs
+      - name: pv-bitwarden1-bitwarden-admin-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-admin-logs
+      - name: pv-bitwarden1-bitwarden-api-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-api-logs
+      - name: pv-bitwarden1-bitwarden-icons-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-icons-logs
+      - name: pv-bitwarden1-bitwarden-notifications-logs
+        persistentVolumeClaim:
+          claimName: pv-bitwarden1-bitwarden-notifications-logs
