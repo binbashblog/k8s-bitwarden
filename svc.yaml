@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: bitwarden
+  name: bitwarden1-nginx
+spec:
+  ports:
+  - name: https-port
+    port: 8443
+    targetPort: 8443
+  selector:
+    app: bitwarden1
