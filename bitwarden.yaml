@@ -246,7 +246,7 @@ spec:
             name: bitwarden1-config
         ports:
         - name: http-port
-          containerPort: 8088
+          containerPort: 80
         volumeMounts:
         - name: pv-bitwarden1-bitwarden-nginx
           mountPath: /etc/bitwarden/nginx
