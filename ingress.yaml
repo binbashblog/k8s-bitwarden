@@ -1,0 +1,31 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: bitwarden
+  name: bitwarden1
+  annotations:
+#    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+#    nginx.ingress.nginx.org/ssl-backends: "bitwarden1"
+#    nginx.ingress.kubernetes.io/ingress.allow-http: "false"
+#    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  tls:
+  - hosts:
+    - bitwarden.CHANGEME.com
+    secretName: CHANGEME.com
+  rules:
+  - host: bitwarden.CHANGEME.com
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: bitwarden1-nginx
+          servicePort: 80
+  - host: bitwarden
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: bitwarden1-nginx
+          servicePort: 80
