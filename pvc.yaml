@@ -1,0 +1,320 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-data
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-mssql-data
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-log
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-mssql-log
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-backups
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-mssql-backups
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-web
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-web
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-attachments
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-attachments
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-core
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-core
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-cacerts
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-cacerts
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-identity
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-identity
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-nginx
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-nginx
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-letsencrypt
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-letsencrypt
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-ssl
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-ssl
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-sso-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-sso-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-portal-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-portal-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-events-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-events-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-nginx-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-nginx-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-identity-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-identity-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-admin-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-admin-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-api-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-api-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-icons-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-icons-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-notifications-logs
+spec:
+  selector:
+    matchLabels:
+      name: pv-bitwarden1-bitwarden-notifications-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
