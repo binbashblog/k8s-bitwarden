@@ -1,0 +1,320 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-data
+  labels:
+    name: pv-bitwarden1-mssql-data
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/mssql/data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-log
+  labels:
+    name: pv-bitwarden1-mssql-log
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/mssql/log
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-mssql-backups
+  labels:
+    name: pv-bitwarden1-mssql-backups
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/mssql/backups
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-web
+  labels:
+    name: pv-bitwarden1-bitwarden-web
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/web
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-attachments
+  labels:
+    name: pv-bitwarden1-bitwarden-attachments
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/core/attachments
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-core
+  labels:
+    name: pv-bitwarden1-bitwarden-core
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/core
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-cacerts
+  labels:
+    name: pv-bitwarden1-bitwarden-cacerts
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/ca-certificates
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-identity
+  labels:
+    name: pv-bitwarden1-bitwarden-identity
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/identity
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-nginx
+  labels:
+    name: pv-bitwarden1-bitwarden-nginx
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/nginx
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-letsencrypt
+  labels:
+    name: pv-bitwarden1-bitwarden-letsencrypt
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/letsencrypt
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-ssl
+  labels:
+    name: pv-bitwarden1-bitwarden-ssl
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/ssl
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-sso-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-sso-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/sso
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-portal-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-portal-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/portal
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-events-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-events-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/events
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-nginx-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-nginx-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/nginx
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-identity-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-identity-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/identity
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-admin-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-admin-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/admin
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-api-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-api-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/api
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-icons-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-icons-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/icons
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: bitwarden
+  name: pv-bitwarden1-bitwarden-notifications-logs
+  labels:
+    name: pv-bitwarden1-bitwarden-notifications-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /exports/bwdata/logs/notifications
