@@ -2,9 +2,9 @@
 
 Uses the official bitwarden docker images instead of the 3rd party rust implementation
 
-##Requirements
-*Docker 18.06.2-ce
-*Kubernetes v1.12.5
+## Requirements
+* Docker 18.06.2-ce
+* Kubernetes v1.12.5
 
 I first install the official docker image (https://bitwarden.com/help/article/install-on-premise/) on a machine running centos 7 to get the bwdata directory file structure and the configs the bitwarden python script generates which I then copy to a nfs server. 
 
